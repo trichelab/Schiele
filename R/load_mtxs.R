@@ -19,8 +19,27 @@ load_mtxs <- function(runs, ..., BPPARAM=SerialParam()) {
     names(runs) <- runs
   }
 
-  # can parallelize here; do QC post-merge
-  moby <- do.call(cbind, bplapply(runs, load_mtx, ..., BPPARAM=BPPARAM))
-  as(SummarizedExperiment(list(counts=moby)), "SingleCellExperiment")
+  res <- bplapply(runs, load_mtx, ..., BPPARAM=BPPARAM)
+  moby <- do.call(cbind, .rename_cells(res))
+  as(SummarizedExperiment(list(counts=moby)), 
+     "SingleCellExperiment")
 
+}
+
+
+# helper fn
+.rename_cells <- function(objs) {
+  stubs <- names(objs)
+  names(stubs) <- stubs
+  res <- lapply(seq_along(mapping), .rename, objs=objs, stubs=stubs)
+  names(res) <- names(objs)
+  return(res)
+}
+
+# helper fn
+.rename <- function(i, objs, stubs, sep=",") {
+  obj <- objs[[i]]
+  stub <- stubs[i]
+  colnames(obj) <- paste(stub, colnames(obj), sep=sep)
+  return(obj)
 }

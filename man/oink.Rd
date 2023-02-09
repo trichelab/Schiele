@@ -12,7 +12,7 @@ oink(runs, ...)
 \item{...}{arguments to pass on to load_mtxs()}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{   a Seurat object, if Seurat is (tragically) installed
+\if{html}{\out{<div class="sourceCode">}}\preformatted{   a Seurat object, if Seurat is (tragically) loaded
 }\if{html}{\out{</div>}}
 }
 \description{

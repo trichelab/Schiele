@@ -3,7 +3,7 @@
 #' @param runs    a named vector of paths (if unnamed, try using the entries)
 #' @param ...     arguments to pass on to load_mtxs()
 #' 
-#' @return        a Seurat object, if Seurat is (tragically) installed
+#' @return        a Seurat object, if Seurat is (tragically) loaded
 #' 
 #' @export
 oink <- function(runs, ...) {
@@ -12,7 +12,10 @@ oink <- function(runs, ...) {
   if (requireNamespace("Seurat")) {
     res <- as(res, "Seurat")
   } else {
-    message("Alas, Seurat is not installed. Returning an SCE.")
+    message("Alas, Seurat could not be loaded.")
+    message("There are many, many reasons this could happen.") 
+    message("Fortunately, you will still receive a SingleCellExperiment!")
+    message("Perhaps there is a reason people at (e.g.) Genentech use these.")
   }
   return(res)
 
