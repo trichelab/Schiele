@@ -2,19 +2,19 @@
 % Please edit documentation in R/oink.R
 \name{oink}
 \alias{oink}
-\title{Load some perfectly good data into a Seurat object.}
+\title{Load multiple count matrices into a Seurat object (perhaps)}
 \usage{
 oink(runs, ...)
 }
 \arguments{
 \item{runs}{a named vector of paths (if unnamed, try using the entries)}
 
-\item{...}{arguments to pass on to load_mtxs()}
+\item{...}{arguments to pass on to sce()}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{   a Seurat object, if Seurat is (tragically) loaded
+\if{html}{\out{<div class="sourceCode">}}\preformatted{   a Seurat object, if Seurat is (tragically) loaded, else an SCE
 }\if{html}{\out{</div>}}
 }
 \description{
-Load some perfectly good data into a Seurat object.
+Load multiple count matrices into a Seurat object (perhaps)
 }

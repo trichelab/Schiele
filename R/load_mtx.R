@@ -1,4 +1,4 @@
-#' Load a triple of features, cell, feature x cell counts, as from bustools
+#' Load features, cells, feature x cell counts from files, as from 10X
 #' 
 #' The returned matrix is a dgCMatrix as used by (e.g.) SingleCellExperiment.
 #' This function is useful when processing data from (e.g.) kallisto|bustools, 

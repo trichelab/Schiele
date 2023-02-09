@@ -2,8 +2,8 @@
 
 export(find_multiple)
 export(load_mtx)
-export(load_mtxs)
 export(oink)
+export(sce)
 import(BiocParallel)
 import(Matrix)
 import(SingleCellExperiment)

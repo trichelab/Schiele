@@ -1,6 +1,6 @@
-#' find out if a package is installed more than once
+#' see if a package is installed more than once
 #' 
-#' @param   Package   name of the package
+#' @param   pkg     name of the package
 #'
 #' @return  a data.frame with columns 'Package' and 'LibPath' of 0 or more rows
 #' 
@@ -8,11 +8,11 @@
 #' find_multiple("Seurat")
 #'
 #' @export
-find_multiple <- function(Package = "Seurat") { 
+find_multiple <- function(pkg = "Seurat") { 
 
-  installs <- subset(data.frame(library()$results[, 1:2]), Package == Package)
+  installs <- subset(data.frame(library()$results[, 1:2]), Package == pkg)
   if (nrow(installs) > 1) {
-    message("Warning: you have MULTIPLE installations of ", Package, " visible")
+    message("Warning: you have MULTIPLE installations of ", pkg, " visible")
     apply(installs, 1, .to_remove)
   }
   invisible(installs)

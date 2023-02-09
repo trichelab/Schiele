@@ -2,7 +2,7 @@
 % Please edit documentation in R/load_mtx.R
 \name{load_mtx}
 \alias{load_mtx}
-\title{Load a triple of features, cell, feature x cell counts, as from bustools}
+\title{Load features, cells, feature x cell counts from files, as from 10X}
 \usage{
 load_mtx(path = ".", verbose = TRUE, frags = NULL, splt = FALSE, spltcol = 3)
 }

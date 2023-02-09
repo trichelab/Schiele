@@ -2,18 +2,18 @@
 % Please edit documentation in R/find_multiple.R
 \name{find_multiple}
 \alias{find_multiple}
-\title{find out if a package is installed more than once}
+\title{see if a package is installed more than once}
 \usage{
-find_multiple(Package = "Seurat")
+find_multiple(pkg = "Seurat")
 }
 \arguments{
-\item{Package}{name of the package}
+\item{pkg}{name of the package}
 }
 \value{
 a data.frame with columns 'Package' and 'LibPath' of 0 or more rows
 }
 \description{
-find out if a package is installed more than once
+see if a package is installed more than once
 }
 \examples{
 find_multiple("Seurat")
