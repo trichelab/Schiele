@@ -2,6 +2,7 @@
 
 export(load_mtx)
 export(load_mtxs)
+export(oink)
 import(BiocParallel)
 import(Matrix)
 import(SingleCellExperiment)
