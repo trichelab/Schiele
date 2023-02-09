@@ -6,7 +6,6 @@
 #' 
 #' @return        a SingleCellExperiment
 #' 
-#' @import scran
 #' @import BiocParallel 
 #' @import SummarizedExperiment
 #' @import SingleCellExperiment
