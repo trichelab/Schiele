@@ -2,8 +2,8 @@ Package: Schiele
 Type: Package
 Title: Seurat on a diet
 Description: Egon Schiele was an impressionist painter noted for his intensity.
-Version: 0.0.20230209.1
-Date: 2023-02-09
+Version: 0.0.20230330
+Date: 2023-03-30
 Authors@R: person("Tim", "Triche, Jr.", role=c("aut", "cre"), email="trichelab@gmail.com")
 Author: Tim Triche, Jr. [aut, cre]
 Maintainer: Tim Triche, Jr. <trichelab@gmail.com>
@@ -11,18 +11,20 @@ URL: https://github.com/trichelab/Schiele
 BugReports: https://github.com/trichelab/Schiele/issues
 License: MIT + file LICENSE
 Depends:
-    R (>= 3.0.0)
-Imports:
-    Matrix, 
-    BiocParallel,
-    SummarizedExperiment,
+    R (>= 4.0.0),
+    DropletUtils,
     SingleCellExperiment
+Imports: 
+    Matrix,
+    BiocParallel
 Suggests:
     covr,
     testthat,
     Nebulosa,
     Seurat, 
     scGate,
+    RcppML,
+    singlet,
     dsb
 Encoding: UTF-8
 RoxygenNote: 7.2.3
