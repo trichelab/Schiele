@@ -9,8 +9,8 @@
 #' 
 #' @export
 kneePlot <- function(sce, target=10000) {
-  name <- as.character(sapply(match.call()[-1], deparse)[1])
-  title <- paste0("kneePlot(", name, ")")
+  args <- paste(sapply(match.call()[-1], deparse), collapse=", ")
+  title <- paste0("kneePlot(", args, ")")
   knee <- data.frame(UMIs=colSums(counts(sce)))
   knee <- knee[order(knee$UMIs, decreasing=TRUE), , drop=FALSE]
   knee$rank <- seq_len(nrow(knee))
