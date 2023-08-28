@@ -11,7 +11,7 @@
 #' 
 #' @examples 
 #' bus_txt <- system.file("extdata", "short.bus.txt.gz", package="Schiele")
-#' bus <- load_bus_txt(bus_txt)
+#' bus <- loadBusText(bus_txt)
 #' 
 #' # how many fragments per cell? (low-pass CITEseq example)
 #' summary(as.integer(with(bus, rowsum(count, barcode))))
@@ -23,9 +23,9 @@
 #' summary(sapply(split(bus, bus$barcode), function(x) length(unique(x$set))))
 #'
 #' @export
-load_bus_txt <- function(file) {
+loadBusText <- function(file) {
 
   read.table(file, header=FALSE, sep="\t", stringsAsFactors=FALSE, 
-             col.names=c("barcode","umi","set","count"))
+             col.names=c("barcode","umi","set","count")) # i.e., B, U, S, count
 
 }

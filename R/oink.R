@@ -1,14 +1,14 @@
 #' Load multiple count matrices into a Seurat object (perhaps)
 #' 
 #' @param runs    a named vector of paths (if unnamed, try using the entries)
-#' @param ...     arguments to pass on to sce()
+#' @param ...     arguments to pass on to SCE()
 #' 
 #' @return        a Seurat object, if Seurat is (tragically) loaded, else an SCE
 #' 
 #' @export
 oink <- function(runs, ...) {
 
-  res <- sce(runs, ...) 
+  res <- SCE(runs, ...) 
   if (requireNamespace("Seurat")) {
     return(as(res, "Seurat"))
   } else {

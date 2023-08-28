@@ -5,10 +5,10 @@
 #' @return  a data.frame with columns 'Package' and 'LibPath' of 0 or more rows
 #' 
 #' @examples
-#' find_multiple("Seurat")
+#' findMultiple("Seurat")
 #'
 #' @export
-find_multiple <- function(pkg = "Seurat") { 
+findMultiple <- function(pkg = "Seurat") { 
 
   installs <- subset(data.frame(library()$results[, 1:2]), Package == pkg)
   if (nrow(installs) > 1) {

@@ -2,7 +2,7 @@
 #' 
 #' @param runs    a named vector of paths (if unnamed, try using the entries)
 #' @param verbose be verbose? (FALSE) 
-#' @param ...     other arguments to pass on to load_mtx() 
+#' @param ...     other arguments to pass on to loadMatrix() 
 #' @param BPPARAM if running in parallel, provide a MulticoreParam or similar
 #' 
 #' @return        a SingleCellExperiment
@@ -12,12 +12,12 @@
 #' @import SingleCellExperiment
 #' 
 #' @export
-sce <- function(runs, verbose=FALSE, ..., BPPARAM=SerialParam()) {
+SCE <- function(runs, verbose=FALSE, ..., BPPARAM=SerialParam()) {
 
   # sanity checking prior to processing  
   if (is.null(names(runs))) names(runs) <- runs
   stopifnot(.runs_ok(runs))
-  res <- bplapply(runs, load_mtx, verbose=verbose, ..., BPPARAM=BPPARAM)
+  res <- bplapply(runs, loadMatrix, verbose=verbose, ..., BPPARAM=BPPARAM)
   res <- .rename_cells(res)
   res <- do.call(cbind, res)
   as(SummarizedExperiment(list(counts=res)), "SingleCellExperiment")

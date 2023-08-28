@@ -8,7 +8,7 @@
 #' @param   path      where the counts files are (features, barcodes, mtx) (".")
 #' @param   frags     optional patterns to scan for features, barcodes, matrix
 #' @param   splt      split by feature type? (FALSE)
-#' @param   spltcol   if splitting by feature type, which column to use? (3)
+#' @param   spcol     if splitting by feature type, which column to use? (3)
 #' @param   verbose   be verbose? (TRUE)
 #' 
 #' @return            a dgCMatrix 
@@ -19,7 +19,7 @@
 #' @import  Matrix
 #' 
 #' @export
-load_mtx <- function(path=".", verbose=TRUE, frags=NULL, splt=FALSE, spltcol=3){
+loadMatrix <- function(path=".", verbose=TRUE, frags=NULL, splt=FALSE, spcol=3){
 
   message("Reading from ", path, "...")
   if (is.null(frags)) {
@@ -31,7 +31,7 @@ load_mtx <- function(path=".", verbose=TRUE, frags=NULL, splt=FALSE, spltcol=3){
 
   files <- lapply(frags, function(fr) grep(fr, list.files(path), value=TRUE))
   files <- lapply(files, function(fl) file.path(path, fl))
-  dat <- with(files, .readSparseMat(mat))
+  dat <- with(files, readSparseMat(mat))
 
   rows <- with(files, read.table(features)[,1])
   if (length(rows) == ncol(dat)) dat <- as(t(dat), "CsparseMatrix")
@@ -46,13 +46,9 @@ load_mtx <- function(path=".", verbose=TRUE, frags=NULL, splt=FALSE, spltcol=3){
   if(verbose) message("Labeled ", ncol(dat), " columns.")
 
   if (splt) {
-    rowsplit <- with(files, read.table(features)[, spltcol])
+    rowsplit <- with(files, read.table(features)[, spcol])
     dat <- split(dat, rowsplit)
   } 
   return(dat)
 
 }
-
-
-# helper fn, refactored out of the above for ease of repurposing
-.readSparseMat <- function(mat) as(t(readMM(mat)), "CsparseMatrix")
