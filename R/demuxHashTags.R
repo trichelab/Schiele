@@ -24,11 +24,15 @@
 #' @export
 demuxHashTags <- function(sce, hto=NULL, ...) { 
 
-  if (!"keep" %in% names(colData(sce))) stop("colData(sce) must contain `keep`")
-  if (!is.logical(sce$keep)) stop("colData(sce)$keep must be logical")
+  if (!"keep" %in% names(colData(sce))) {
+    stop("colData(sce) must contain `keep`. Run markKept(sce) first.")
+  }
+  if (!is.logical(sce$keep)) {
+    stop("colData(sce)$keep must be logical.")
+  }
+
   kept <- colnames(sce)[which(sce$keep)]
   if (is.null(hto)) hto <- rownames(HTOs(sce))
-
   hd <- hashedDrops(HTOs(sce[, kept]), ...)
   metadata(sce)$hashed <- hd
   colData(sce)[, "HTO"] <- NA
