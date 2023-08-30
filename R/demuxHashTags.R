@@ -24,6 +24,8 @@
 #' @export
 demuxHashTags <- function(sce, hto=NULL, ...) { 
 
+  message("See Schiele::pHTO() for a much faster implementation.")
+
   if (!"keep" %in% names(colData(sce))) {
     stop("colData(sce) must contain `keep`. Run markKept(sce) first.")
   }
