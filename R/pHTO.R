@@ -40,6 +40,7 @@ pHTO <- function(sce, off=0.1) {
 .pHTO_chisq <- function(UMIs, whichHTO, off=0.1) {
 
   stopifnot(names(whichHTO) == colnames(UMIs)) 
+  HTOnames <- rownames(UMIs)
 
   nHTOs <- nrow(UMIs)
   stopifnot(ncol(UMIs) == length(whichHTO)) 

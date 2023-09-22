@@ -9,10 +9,10 @@ oink(runs, ...)
 \arguments{
 \item{runs}{a named vector of paths (if unnamed, try using the entries)}
 
-\item{...}{arguments to pass on to SCE()}
+\item{...}{arguments to pass on to sce()}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{   a Seurat object, if Seurat is (tragically) loaded, else an SCE
+\if{html}{\out{<div class="sourceCode">}}\preformatted{   a Seurat object, if Seurat is (tragically) loaded, else an sce
 }\if{html}{\out{</div>}}
 }
 \description{

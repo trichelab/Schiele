@@ -1,10 +1,10 @@
 #' accessor for the 'ADT' altExp in a sensibly processed SingleCellExperiment
 #' 
-#' @param sce a SingleCellExperiment, ideally one from \code{\link{SCE}}
+#' @param sce a SingleCellExperiment, ideally one from \code{\link{sce}}
 #'
 #' @return a matrix of ADT counts, with rownames corresponding to the ADT names
 #' 
-#' @seealso \code{\link{SCE}}
+#' @seealso \code{\link{sce}}
 #' 
 #' @import SingleCellExperiment
 #'

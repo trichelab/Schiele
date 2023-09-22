@@ -2,6 +2,7 @@
 #' 
 #' @param runs    a named vector of paths (if unnamed, try using the entries)
 #' @param verbose be verbose? (FALSE) 
+#' @param hasHTOs shall HTOs be detected and split off? (FALSE) 
 #' @param ...     other arguments to pass on to loadMatrix() 
 #' @param BPPARAM if running in parallel, provide a MulticoreParam or similar
 #' 
@@ -12,7 +13,7 @@
 #' @import SingleCellExperiment
 #' 
 #' @export
-SCE <- function(runs, verbose=FALSE, ..., BPPARAM=SerialParam()) {
+sce <- function(runs, verbose=FALSE, hasHTOs=FALSE, ..., BPPARAM=SerialParam()){
 
   # sanity checking prior to processing  
   if (is.null(names(runs))) names(runs) <- runs
@@ -20,7 +21,14 @@ SCE <- function(runs, verbose=FALSE, ..., BPPARAM=SerialParam()) {
   res <- bplapply(runs, loadMatrix, verbose=verbose, ..., BPPARAM=BPPARAM)
   res <- .rename_cells(res)
   res <- do.call(cbind, res)
-  as(SummarizedExperiment(list(counts=res)), "SingleCellExperiment")
+  res <- as(SummarizedExperiment(list(counts=res)), "SingleCellExperiment")
+  if (hasHTOs) {
+    rowData(res)$type <- ifelse(grepl("HTO", rownames(res)), "HTO", "ADTorGEX")
+    res <- splitAltExps(res, rowData(res)$type)
+    mainExpName(res) <- "ADTorGEX"
+    altExpNames(res) <- "HTO"
+  }
+  return(res)
 
 }
 

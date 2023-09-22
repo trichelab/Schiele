@@ -7,7 +7,7 @@
 mRNA(sce, a = "logcounts")
 }
 \arguments{
-\item{sce}{a SingleCellExperiment, ideally one from \code{\link{SCE}}}
+\item{sce}{a SingleCellExperiment, ideally one from \code{\link{sce}}}
 }
 \value{
 a matrix of RNA abundance, with rownames corresponding to genes
@@ -16,5 +16,5 @@ a matrix of RNA abundance, with rownames corresponding to genes
 Note that unlike ADTs and HTOs, the default assay is 'logcounts' for \code{mRNA}.
 }
 \seealso{
-\code{\link{SCE}}
+\code{\link{sce}}
 }

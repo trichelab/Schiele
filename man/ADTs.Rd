@@ -7,7 +7,7 @@
 ADTs(sce, a = "counts")
 }
 \arguments{
-\item{sce}{a SingleCellExperiment, ideally one from \code{\link{SCE}}}
+\item{sce}{a SingleCellExperiment, ideally one from \code{\link{sce}}}
 }
 \value{
 a matrix of ADT counts, with rownames corresponding to the ADT names
@@ -16,5 +16,5 @@ a matrix of ADT counts, with rownames corresponding to the ADT names
 accessor for the 'ADT' altExp in a sensibly processed SingleCellExperiment
 }
 \seealso{
-\code{\link{SCE}}
+\code{\link{sce}}
 }
