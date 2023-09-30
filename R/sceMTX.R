@@ -2,7 +2,7 @@
 #' 
 #' @param runs    a named vector of paths (if unnamed, try using the entries)
 #' @param verbose be verbose? (FALSE) 
-#' @param hasHTOs shall HTOs be detected and split off? (FALSE) 
+#' @param splt    attempt to split HTOs from ADTs/mRNA? (only if found)
 #' @param ...     other arguments to pass on to loadMatrix() 
 #' @param BPPARAM if running in parallel, provide a MulticoreParam or similar
 #' 
@@ -13,21 +13,19 @@
 #' @import SingleCellExperiment
 #' 
 #' @export
-sce <- function(runs, verbose=FALSE, hasHTOs=FALSE, ..., BPPARAM=SerialParam()){
+sceMTX <- function(runs, splt=TRUE, verbose=FALSE, ..., BPPARAM=NULL) {
 
   # sanity checking prior to processing  
   if (is.null(names(runs))) names(runs) <- runs
   stopifnot(.runs_ok(runs))
+
+  # run through the runs 
+  if (is.null(BPPARAM)) BPPARAM <- SerialParam(progressbar=TRUE)
   res <- bplapply(runs, loadMatrix, verbose=verbose, ..., BPPARAM=BPPARAM)
   res <- .rename_cells(res)
   res <- do.call(cbind, res)
   res <- as(SummarizedExperiment(list(counts=res)), "SingleCellExperiment")
-  if (hasHTOs) {
-    rowData(res)$type <- ifelse(grepl("HTO", rownames(res)), "HTO", "ADTorGEX")
-    res <- splitAltExps(res, rowData(res)$type)
-    mainExpName(res) <- "ADTorGEX"
-    altExpNames(res) <- "HTO"
-  }
+  if (splt) res <- .splitHTOs(res) # .splitHTOs is defined in sceH5.R
   return(res)
 
 }

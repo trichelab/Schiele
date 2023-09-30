@@ -16,5 +16,6 @@ pHTO(sce, off = 0.1)
 }\if{html}{\out{</div>}}
 }
 \description{
-Use a multinomial test to calculate HTO probability.
+Use a chi-squared test to calculate HTO probability.
+FIXME: switch this to on-target vs. off-target for 1st and 2nd HTOs.
 }

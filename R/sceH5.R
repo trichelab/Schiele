@@ -1,25 +1,44 @@
-#' Read a 10X-formatted .h5 file into a SummarizedExperiment
+#' read in .h5 output, as from using cellbender on kallisto/kite .h5ad files.
 #' 
-#' This function is useful for data processed by (e.g.) cellbender.
+#' @param path      path to cellbender or 10X (cellranger v3) .h5 file
+#' @param splt      attempt to split HTOs from ADTs/mRNA? (only if found)
 #' 
-#' @param   path      path to the .h5 file
-#' @param   splt      split by feature type, e.g. HTO vs. ADT? (FALSE)
-#' @param   spcol     if splitting by feature type, which column to use? (3)
-#' @param   verbose   be verbose? (TRUE)
+#' @return a SingleCellExperiment with a DelayedMatrix of counts
 #' 
-#' @return            a SingleCellExperiment
+#' @import HDF5Array
 #'
-#' @import            DropletUtils
-#' 
 #' @export
-sceH5 <- function(path, splt=FALSE, spcol=3, verbose=TRUE) {
+sceH5 <- function(path, splt=TRUE) { 
 
-  message("Reading ", path, "...")
-  sce <- read10xCounts(path, type="HDF5")
-  
-  if (splt) {
-    rowsplit <- with(files, read.table(features)[, spcol])
-    dat <- split(dat, rowsplit)
-  } 
+  group <- "matrix"
+  mat <- HDF5Array::TENxMatrix(path, group)
+
+  cell.names <- as.character(h5read(path, paste0(group, "/barcodes")))
+  stopifnot(length(cell.names) == ncol(mat))
+  stopifnot(identical(colnames(mat), cell.names))
+
+  gene.names <- as.character(h5read(path, paste0(group, "/features/name")))
+  stopifnot(length(gene.names) == nrow(mat))
+  rownames(mat) <- gene.names
+
+  res <- as(SummarizedExperiment(list(counts=mat)), "SingleCellExperiment")
+  rowData(res)$type <- ifelse(grepl("HTO", rownames(res)), "HTO", "ADTorGEX")
+  if (splt) res <- .splitHTOs(res)
+  return(res)
 
 }
+
+
+# helper fn
+.splitHTOs <- function(res) { 
+    
+  if (any(rowData(res)$type == "HTO")) {
+    res <- splitAltExps(res, rowData(res)$type)
+    mainExpName(res) <- "ADTorGEX"
+    altExpNames(res) <- "HTO"
+  }
+  return(res)
+
+}
+
+

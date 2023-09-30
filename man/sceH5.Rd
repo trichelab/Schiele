@@ -2,23 +2,18 @@
 % Please edit documentation in R/sceH5.R
 \name{sceH5}
 \alias{sceH5}
-\title{Read a 10X-formatted .h5 file into a SummarizedExperiment}
+\title{read in .h5 output, as from using cellbender on kallisto/kite .h5ad files.}
 \usage{
-sceH5(path, splt = FALSE, spcol = 3, verbose = TRUE)
+sceH5(path, splt = TRUE)
 }
 \arguments{
-\item{path}{path to the .h5 file}
+\item{path}{path to cellbender or 10X (cellranger v3) .h5 file}
 
-\item{splt}{split by feature type, e.g. HTO vs. ADT? (FALSE)}
-
-\item{spcol}{if splitting by feature type, which column to use? (3)}
-
-\item{verbose}{be verbose? (TRUE)}
+\item{splt}{attempt to split HTOs from ADTs/mRNA? (only if found)}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{       a SingleCellExperiment
-}\if{html}{\out{</div>}}
+a SingleCellExperiment with a DelayedMatrix of counts
 }
 \description{
-This function is useful for data processed by (e.g.) cellbender.
+read in .h5 output, as from using cellbender on kallisto/kite .h5ad files.
 }

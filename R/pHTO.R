@@ -1,6 +1,7 @@
 #' moronically simple function to calculate Pr(HTO=hto|counts)
 #' 
-#' Use a multinomial test to calculate HTO probability.
+#' Use a chi-squared test to calculate HTO probability.
+#' FIXME: switch this to on-target vs. off-target for 1st and 2nd HTOs.
 #'
 #' @param sce   a SingleCellExperiment object with !is.null(altExp(sce, "HTO"))
 #' @param off   offtarget probability (default is 0.1 total for all !whichHTO)
