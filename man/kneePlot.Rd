@@ -2,18 +2,20 @@
 % Please edit documentation in R/kneePlot.R
 \name{kneePlot}
 \alias{kneePlot}
-\title{Create a halfway decent knee plot for shallow CITEseq runs}
+\title{Create a halfway decent knee plot for shallow or deep single-cell seq runs}
 \usage{
-kneePlot(sce, target = 10000)
+kneePlot(sce, target = 10000, column = "totalUMIs")
 }
 \arguments{
 \item{sce}{A SingleCellExperiment object}
 
 \item{target}{The target number of cells (10000)}
+
+\item{column}{Optional colData name for precomputed results ("totalUMIs")}
 }
 \value{
 A ggplot2 object
 }
 \description{
-Create a halfway decent knee plot for shallow CITEseq runs
+Create a halfway decent knee plot for shallow or deep single-cell seq runs
 }
