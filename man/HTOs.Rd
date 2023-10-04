@@ -7,7 +7,7 @@
 HTOs(sce, a = "counts")
 }
 \arguments{
-\item{sce}{a SingleCellExperiment, ideally one from \code{\link{sce}}}
+\item{sce}{a SingleCellExperiment, ideally one from sceH5 or sceMTX}
 }
 \value{
 a matrix of HTO counts, with rownames corresponding to the HTO names
@@ -18,7 +18,9 @@ accessor for the 'HTO' altExp in a sensibly processed SingleCellExperiment
 \seealso{
 \code{\link{demuxHashTags}}
 
-\code{\link{pHTO}}
+\code{\link{sceMTX}}
 
-\code{\link{sce}}
+\code{\link{sceH5}}
+
+\code{\link{pHTO}}
 }
