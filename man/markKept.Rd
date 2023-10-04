@@ -4,7 +4,7 @@
 \alias{markKept}
 \title{Attempt to call nonempty cells based on a target cell number from a kneeplot}
 \usage{
-markKept(sce, targetCells = 20000, targetUMIs = 50, ...)
+markKept(sce, targetCells = 20000, targetUMIs = 50, column = "UMIs", ...)
 }
 \arguments{
 \item{sce}{a SingleCellExperiment object}
@@ -13,7 +13,9 @@ markKept(sce, targetCells = 20000, targetUMIs = 50, ...)
 
 \item{targetUMIs}{minimum UMIs to aim for if UMIs\link{targetCells} is low (50)}
 
-\item{...}{additional arguments to be passed to emptyDrops}
+\item{column}{optional colData name for cached results ("UMIs")}
+
+\item{...}{additional arguments to perhaps pass to emptyDrops}
 }
 \value{
 a SingleCellExperiment object with a new column \code{keep}
