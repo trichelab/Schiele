@@ -12,7 +12,7 @@
 #' @export
 kneePlot <- function(sce, target=10000, column="totalUMIs") {
 
-  args <- paste(sapply(match.call()[-1], deparse)[1:2], collapse=", ")
+  args <- sapply(match.call()[-1], deparse)[1:2]
 
   # don't recompute if already available
   if (column %in% names(colData(sce))) {
@@ -28,7 +28,7 @@ kneePlot <- function(sce, target=10000, column="totalUMIs") {
   knee$rank <- seq_len(nrow(knee))
   cutoff <- knee[target, "UMIs"]
 
-  title <- paste0("kneePlot(", args, ")")
+  title <- paste0("kneePlot(", paste(args, collapse=", "), ")")
   ggplot(subset(knee, UMIs > 0), 
          aes(x=rank, y=UMIs)) + 
     geom_hline(yintercept=cutoff, linewidth=0.5, linetype="dashed") + 
